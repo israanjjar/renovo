@@ -24,11 +24,12 @@ export default function ProgressBar({
       )}
       <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
         <div
-          className="h-full rounded-full transition-all duration-500"
+          className="h-full rounded-full animate-grow-width"
           style={{
+            '--bar-width': `${clampedValue}%`,
             width: `${clampedValue}%`,
             backgroundColor: color,
-          }}
+          } as React.CSSProperties}
         />
       </div>
     </div>

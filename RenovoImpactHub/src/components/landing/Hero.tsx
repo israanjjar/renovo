@@ -1,9 +1,28 @@
+'use client';
+
 import Link from 'next/link';
+import AnimatedCounter from '@/components/ui/AnimatedCounter';
 
 export default function Hero() {
   return (
-    <section className="bg-gradient-to-br from-secondary to-primary text-white">
-      <div className="max-w-7xl mx-auto px-4 py-20 md:py-28">
+    <section className="bg-gradient-to-br from-secondary to-primary text-white relative overflow-hidden">
+      {/* Decorative floating leaf */}
+      <svg
+        className="absolute top-10 right-10 w-32 h-32 text-white/5 rotate-12"
+        viewBox="0 0 100 100"
+        fill="currentColor"
+      >
+        <path d="M50 5C50 5 20 25 15 55C10 85 40 95 50 95C60 95 90 85 85 55C80 25 50 5 50 5ZM50 15C50 15 55 45 50 75" />
+      </svg>
+      <svg
+        className="absolute bottom-16 left-8 w-20 h-20 text-white/5 -rotate-45"
+        viewBox="0 0 100 100"
+        fill="currentColor"
+      >
+        <path d="M50 5C50 5 20 25 15 55C10 85 40 95 50 95C60 95 90 85 85 55C80 25 50 5 50 5ZM50 15C50 15 55 45 50 75" />
+      </svg>
+
+      <div className="max-w-7xl mx-auto px-4 py-20 md:py-28 relative">
         <div className="max-w-3xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
             Your Impact, Tracked. Your Voice, Heard.
@@ -30,15 +49,17 @@ export default function Hero() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16">
           {[
-            { value: '2,450', label: 'Trees Planted' },
-            { value: '156t', label: 'CO\u2082 Offset' },
-            { value: '$12,400', label: 'Funded' },
+            { value: 2450, label: 'Trees Planted', prefix: '', suffix: '' },
+            { value: 156, label: 'CO\u2082 Offset', prefix: '', suffix: 't' },
+            { value: 12400, label: 'Funded', prefix: '$', suffix: '' },
           ].map((stat, i) => (
             <div
               key={stat.label}
               className={`bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center animate-fade-in-up ${i === 1 ? 'animation-delay-100' : i === 2 ? 'animation-delay-200' : ''}`}
             >
-              <div className="text-3xl md:text-4xl font-bold">{stat.value}</div>
+              <div className="text-3xl md:text-4xl font-bold">
+                <AnimatedCounter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+              </div>
               <div className="text-sm text-white/80 mt-1">{stat.label}</div>
             </div>
           ))}

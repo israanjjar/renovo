@@ -12,7 +12,7 @@ const allocations = [
 
 export default function TransparencyPreview() {
   return (
-    <section className="bg-white py-16">
+    <section className="bg-bg-warm py-16">
       <div className="max-w-4xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-text-primary text-center mb-3">
           Where Your Money Goes

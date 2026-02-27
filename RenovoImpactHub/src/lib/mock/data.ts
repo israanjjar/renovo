@@ -31,6 +31,7 @@ export const mockProjects: Project[] = [
     startDate: new Date('2025-06-01T00:00:00Z'),
     endDate: undefined,
     allocationPercent: 40,
+    imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&h=400&fit=crop',
     metrics: [
       {
         id: 'metric-1',
@@ -90,6 +91,7 @@ export const mockProjects: Project[] = [
     startDate: new Date('2025-08-15T00:00:00Z'),
     endDate: undefined,
     allocationPercent: 35,
+    imageUrl: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=600&h=400&fit=crop',
     metrics: [
       {
         id: 'metric-4',
@@ -140,6 +142,7 @@ export const mockProjects: Project[] = [
     startDate: new Date('2026-04-01T00:00:00Z'),
     endDate: undefined,
     allocationPercent: 25,
+    imageUrl: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop',
     metrics: [
       {
         id: 'metric-6',

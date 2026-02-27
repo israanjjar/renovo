@@ -60,6 +60,8 @@ export default function VotePage() {
     return votes.filter((v) => v.projectId === projectId).length;
   }
 
+  const totalVotes = votes.length;
+
   async function handleVote(projectId: string) {
     if (!user || userVoteProjectId) return;
     const newVote = await castVote(user.id, votingRound!.id, projectId);
@@ -70,28 +72,34 @@ export default function VotePage() {
   const results = candidateProjects
     .map((p) => ({ project: p, votes: getVoteCount(p.id) }))
     .sort((a, b) => b.votes - a.votes);
-  const totalVotes = votes.length;
 
   return (
-    <div className="min-h-screen bg-bg-primary py-16">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-3xl font-bold text-text-primary">Community Vote</h1>
-        <p className="text-text-secondary mt-1">
-          {formatMonth(votingRound.month)} — Choose which project we fund next month
-        </p>
+    <div className="min-h-screen bg-bg-primary">
+      {/* Gradient header */}
+      <div className="bg-gradient-to-br from-secondary/10 to-primary/10 py-12">
+        <div className="max-w-4xl mx-auto px-4">
+          <h1 className="text-3xl font-bold text-text-primary">Community Vote</h1>
+          <p className="text-text-secondary mt-1">
+            {formatMonth(votingRound.month)} — Choose which project we fund next month
+          </p>
+        </div>
+      </div>
 
+      <div className="max-w-4xl mx-auto px-4 py-8">
         {votingRound.status === 'open' && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-              {candidateProjects.map((project) => (
-                <VotingCard
-                  key={project.id}
-                  project={project}
-                  voteCount={getVoteCount(project.id)}
-                  isSelected={userVoteProjectId === project.id}
-                  onVote={() => handleVote(project.id)}
-                  disabled={!!userVoteProjectId}
-                />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {candidateProjects.map((project, i) => (
+                <div key={project.id} className={`animate-fade-in-up ${i === 1 ? 'animation-delay-100' : i === 2 ? 'animation-delay-200' : ''}`}>
+                  <VotingCard
+                    project={project}
+                    voteCount={getVoteCount(project.id)}
+                    totalVotes={totalVotes}
+                    isSelected={userVoteProjectId === project.id}
+                    onVote={() => handleVote(project.id)}
+                    disabled={!!userVoteProjectId}
+                  />
+                </div>
               ))}
             </div>
 

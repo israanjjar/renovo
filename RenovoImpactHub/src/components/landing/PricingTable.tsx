@@ -54,7 +54,7 @@ const tiers: PricingTier[] = [
 
 export default function PricingTable() {
   return (
-    <section className="bg-bg-secondary py-16">
+    <section className="bg-bg-secondary bg-dot-pattern py-16">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-text-primary text-center mb-10">
           Choose Your Impact Level
@@ -65,12 +65,17 @@ export default function PricingTable() {
             <Card
               key={tier.name}
               className={cn(
-                'flex flex-col animate-fade-in-up',
+                'flex flex-col animate-fade-in-up relative overflow-hidden',
                 i === 1 && 'animation-delay-100',
                 i === 2 && 'animation-delay-200',
                 tier.highlighted && 'ring-2 ring-primary'
               )}
             >
+              {tier.highlighted && (
+                <div className="absolute top-4 right-[-30px] bg-accent-warm text-secondary text-xs font-bold px-8 py-1 rotate-45">
+                  Popular
+                </div>
+              )}
               <h3 className="text-xl font-bold text-text-primary">
                 {tier.name}
               </h3>
@@ -113,6 +118,24 @@ export default function PricingTable() {
               </Link>
             </Card>
           ))}
+        </div>
+
+        {/* Trust line */}
+        <div className="flex items-center justify-center gap-3 mt-10">
+          <div className="flex -space-x-2">
+            {['AR', 'SM', 'JK', 'LP', 'MN'].map((initials, i) => (
+              <div
+                key={initials}
+                className="w-8 h-8 rounded-full bg-primary text-white text-xs font-semibold flex items-center justify-center border-2 border-white"
+                style={{ zIndex: 5 - i }}
+              >
+                {initials}
+              </div>
+            ))}
+          </div>
+          <p className="text-sm text-text-secondary">
+            Trusted by <span className="font-semibold text-text-primary">340+</span> members
+          </p>
         </div>
       </div>
     </section>

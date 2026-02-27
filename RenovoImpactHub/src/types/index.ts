@@ -23,6 +23,7 @@ export interface Project {
   metrics: ProjectMetric[];
   updates: ProjectUpdate[];
   allocationPercent: number;
+  imageUrl?: string;
 }
 
 export interface ProjectMetric {
