@@ -43,14 +43,18 @@ export default function TransparencyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-bg-primary py-16">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-3xl font-bold text-text-primary">Financial Transparency</h1>
-        <p className="text-text-secondary mt-2">
-          We believe in complete openness. Here&apos;s exactly where every dollar goes.
-        </p>
+    <div className="min-h-screen bg-bg-primary">
+      <div className="bg-gradient-to-br from-secondary/10 to-primary/10 py-12">
+        <div className="max-w-4xl mx-auto px-4">
+          <h1 className="text-3xl font-bold text-text-primary">Financial Transparency</h1>
+          <p className="text-text-secondary mt-2">
+            We believe in complete openness. Here&apos;s exactly where every dollar goes.
+          </p>
+        </div>
+      </div>
 
-        <div className="mt-10 space-y-10">
+      <div className="max-w-4xl mx-auto px-4 py-10">
+        <div className="space-y-10">
           {breakdowns.map((breakdown) => (
             <div key={breakdown.month} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center justify-between mb-6">

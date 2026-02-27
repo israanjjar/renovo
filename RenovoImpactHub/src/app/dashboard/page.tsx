@@ -72,13 +72,17 @@ export default function DashboardPage() {
   const latestBreakdown = breakdowns[breakdowns.length - 1];
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
-      <div className="flex items-center gap-3">
-        <h1 className="text-2xl font-bold text-text-primary">
-          Welcome back, {user.name}!
-        </h1>
-        <Badge label={user.tier} color={TIER_COLORS[user.tier]} />
+    <div>
+      <div className="bg-gradient-to-br from-secondary/10 to-primary/10 py-10">
+        <div className="max-w-5xl mx-auto px-4 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-text-primary">
+            Welcome back, {user.name}!
+          </h1>
+          <Badge label={user.tier} color={TIER_COLORS[user.tier]} />
+        </div>
       </div>
+
+      <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
 
       <ImpactSummary
         totalThisMonth={monthlyAmount}
@@ -113,6 +117,7 @@ export default function DashboardPage() {
         >
           Vote Now
         </Link>
+      </div>
       </div>
     </div>
   );

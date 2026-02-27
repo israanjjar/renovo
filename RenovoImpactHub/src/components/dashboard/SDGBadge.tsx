@@ -10,18 +10,24 @@ interface SDGBadgeProps {
 }
 
 export default function SDGBadge({ sdg, size = 'md' }: SDGBadgeProps) {
+  const color = getSDGColor(sdg);
   const sizeClasses = {
-    sm: 'text-xs px-1.5 py-0.5',
-    md: 'text-sm px-2 py-1',
+    sm: 'text-xs px-2 py-0.5',
+    md: 'text-sm px-2.5 py-1',
     lg: 'text-base px-3 py-1.5',
   };
 
   return (
     <span
-      className={cn('rounded-full font-medium text-white inline-block', sizeClasses[size])}
-      style={{ backgroundColor: getSDGColor(sdg) }}
+      className={cn('rounded-full font-medium inline-flex items-center gap-1', sizeClasses[size])}
+      style={{
+        backgroundColor: `${color}15`,
+        color: color,
+        border: `1px solid ${color}30`,
+      }}
     >
-      SDG {sdg}: {SDG_INFO[sdg].name}
+      <span className="font-bold">{sdg}</span>
+      {SDG_INFO[sdg].name}
     </span>
   );
 }

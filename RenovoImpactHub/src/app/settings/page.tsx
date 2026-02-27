@@ -46,9 +46,14 @@ export default function SettingsPage() {
   const tierLabel = user.tier.charAt(0).toUpperCase() + user.tier.slice(1);
 
   return (
-    <div className="min-h-screen bg-bg-primary py-16">
-      <div className="max-w-2xl mx-auto px-4 space-y-8">
-        <h1 className="text-3xl font-bold text-text-primary">Settings</h1>
+    <div className="min-h-screen bg-bg-primary">
+      <div className="bg-gradient-to-br from-secondary/10 to-primary/10 py-12">
+        <div className="max-w-2xl mx-auto px-4">
+          <h1 className="text-3xl font-bold text-text-primary">Account Settings</h1>
+        </div>
+      </div>
+
+      <div className="max-w-2xl mx-auto px-4 py-8 space-y-8">
 
         {/* Profile Section */}
         <Card>

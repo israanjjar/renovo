@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Button from '@/components/ui/Button';
@@ -13,14 +13,39 @@ const navLinks = [
   { href: '/transparency', label: 'Transparency' },
 ];
 
+function LeafLogo({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z" />
+    </svg>
+  );
+}
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY > 10);
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="bg-white border-b border-gray-100 px-4 py-3">
+    <nav
+      className={cn(
+        'sticky top-0 z-50 px-4 py-3 transition-all duration-300',
+        scrolled
+          ? 'bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm'
+          : 'bg-white border-b border-gray-100'
+      )}
+    >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-primary">
+        <Link href="/" className="flex items-center gap-1.5 text-xl font-bold text-primary">
+          <LeafLogo className="w-6 h-6" />
           Renovo
         </Link>
 

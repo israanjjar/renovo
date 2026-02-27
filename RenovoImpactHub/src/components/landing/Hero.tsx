@@ -5,8 +5,19 @@ import AnimatedCounter from '@/components/ui/AnimatedCounter';
 
 export default function Hero() {
   return (
-    <section className="bg-gradient-to-br from-secondary to-primary text-white relative overflow-hidden">
-      {/* Decorative floating leaf */}
+    <section className="relative text-white overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        style={{
+          backgroundImage:
+            'url(https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=80)',
+        }}
+      />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-secondary/90 to-primary/80" />
+
+      {/* Decorative floating leaves */}
       <svg
         className="absolute top-10 right-10 w-32 h-32 text-white/5 rotate-12"
         viewBox="0 0 100 100"

@@ -10,7 +10,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <h3 className="text-lg font-bold mb-3">Renovo</h3>
+            <h3 className="text-lg font-bold mb-3 flex items-center gap-1.5">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z" />
+              </svg>
+              Renovo
+            </h3>
             <p className="text-sm text-gray-300 mb-4">
               Community-driven impact for a sustainable future. Join us in making measurable change.
             </p>

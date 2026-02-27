@@ -1,12 +1,21 @@
 'use client';
 
 import type { Project } from '@/types';
+import { getSDGColor } from '@/lib/utils/sdg';
 import { cn } from '@/lib/utils';
 
 interface VotingResultsProps {
   results: { project: Project; votes: number }[];
   totalVotes: number;
   userVoteProjectId?: string;
+}
+
+function lightenColor(hex: string, amount: number): string {
+  const num = parseInt(hex.replace('#', ''), 16);
+  const r = Math.min(255, (num >> 16) + amount);
+  const g = Math.min(255, ((num >> 8) & 0x00ff) + amount);
+  const b = Math.min(255, (num & 0x0000ff) + amount);
+  return `rgb(${r}, ${g}, ${b})`;
 }
 
 export default function VotingResults({
@@ -28,17 +37,19 @@ export default function VotingResults({
         const isWinner = r.project.id === winnerId;
         const isUserVote = r.project.id === userVoteProjectId;
         const percentage = totalVotes > 0 ? Math.round((r.votes / totalVotes) * 100) : 0;
+        const sdgColor = getSDGColor(r.project.sdgs[0]);
+        const lightColor = lightenColor(sdgColor, 60);
 
         return (
-          <div key={r.project.id} className="space-y-1">
+          <div key={r.project.id} className={cn('space-y-1 p-3 rounded-lg', isWinner && 'bg-accent-warm-light/30 ring-1 ring-accent-warm/40')}>
             <div className="flex items-center justify-between text-sm">
               <div className="flex items-center gap-2">
                 <span className="font-medium text-text-primary">
                   {r.project.title}
                 </span>
                 {isWinner && (
-                  <span className="text-yellow-500 font-semibold text-xs">
-                    🏆 Winner!
+                  <span className="bg-accent-warm text-secondary text-xs font-bold px-2 py-0.5 rounded-full">
+                    Winner
                   </span>
                 )}
                 {isUserVote && (
@@ -53,11 +64,11 @@ export default function VotingResults({
             </div>
             <div className="h-4 bg-gray-100 rounded-full overflow-hidden">
               <div
-                className={cn(
-                  'h-full rounded-full transition-all duration-500',
-                  isWinner ? 'bg-primary' : 'bg-gray-400',
-                )}
-                style={{ width: `${barWidth}%` }}
+                className="h-full rounded-full transition-all duration-700 bar-shine"
+                style={{
+                  width: `${barWidth}%`,
+                  background: `linear-gradient(to right, ${sdgColor}, ${lightColor})`,
+                }}
               />
             </div>
           </div>
