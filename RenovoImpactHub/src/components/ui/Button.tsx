@@ -30,7 +30,7 @@ export default function Button({
   return (
     <button
       className={cn(
-        'rounded-lg font-medium transition-colors disabled:opacity-50',
+        'rounded-lg font-medium transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50',
         variantStyles[variant],
         sizeStyles[size],
         className

@@ -33,10 +33,10 @@ export default function Hero() {
             { value: '2,450', label: 'Trees Planted' },
             { value: '156t', label: 'CO\u2082 Offset' },
             { value: '$12,400', label: 'Funded' },
-          ].map((stat) => (
+          ].map((stat, i) => (
             <div
               key={stat.label}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center"
+              className={`bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center animate-fade-in-up ${i === 1 ? 'animation-delay-100' : i === 2 ? 'animation-delay-200' : ''}`}
             >
               <div className="text-3xl md:text-4xl font-bold">{stat.value}</div>
               <div className="text-sm text-white/80 mt-1">{stat.label}</div>

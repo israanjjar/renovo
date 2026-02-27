@@ -25,8 +25,8 @@ export default function ImpactSummary({
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {stats.map((stat) => (
-        <Card key={stat.label}>
+      {stats.map((stat, i) => (
+        <Card key={stat.label} className={`animate-fade-in-up ${i === 1 ? 'animation-delay-100' : i === 2 ? 'animation-delay-200' : i === 3 ? 'animation-delay-300' : ''}`}>
           <p className="text-2xl font-bold text-text-primary">{stat.value}</p>
           <p className="text-sm text-gray-500 mt-1">{stat.label}</p>
         </Card>

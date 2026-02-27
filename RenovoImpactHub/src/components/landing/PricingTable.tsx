@@ -61,11 +61,13 @@ export default function PricingTable() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {tiers.map((tier) => (
+          {tiers.map((tier, i) => (
             <Card
               key={tier.name}
               className={cn(
-                'flex flex-col',
+                'flex flex-col animate-fade-in-up',
+                i === 1 && 'animation-delay-100',
+                i === 2 && 'animation-delay-200',
                 tier.highlighted && 'ring-2 ring-primary'
               )}
             >

@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Button from '@/components/ui/Button';
+import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '/dashboard', label: 'Dashboard' },
@@ -13,6 +15,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <nav className="bg-white border-b border-gray-100 px-4 py-3">
@@ -27,7 +30,12 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-text-secondary hover:text-primary transition-colors text-sm font-medium"
+              className={cn(
+                'text-sm font-medium transition-colors pb-1',
+                pathname === link.href || pathname?.startsWith(link.href + '/')
+                  ? 'text-primary border-b-2 border-primary'
+                  : 'text-text-secondary hover:text-primary'
+              )}
             >
               {link.label}
             </Link>
@@ -45,6 +53,9 @@ export default function Navbar() {
               Sign Up
             </Button>
           </Link>
+          <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold ml-1">
+            R
+          </div>
         </div>
 
         {/* Mobile hamburger */}
@@ -87,7 +98,12 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-text-secondary hover:text-primary transition-colors text-sm font-medium px-2 py-1"
+                className={cn(
+                  'text-sm font-medium transition-colors px-2 py-1',
+                  pathname === link.href || pathname?.startsWith(link.href + '/')
+                    ? 'text-primary font-semibold'
+                    : 'text-text-secondary hover:text-primary'
+                )}
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}

@@ -5,6 +5,8 @@
   --color-primary-light: #52B788;
   --color-secondary: #1B4332;
   --color-accent: #95D5B2;
+  --color-accent-warm: #D4A853;
+  --color-accent-warm-light: #F5E6C8;
   --color-bg-primary: #FFFFFF;
   --color-bg-secondary: #F0FFF4;
   --color-text-primary: #1B1B1B;
@@ -14,10 +16,41 @@
   --color-sdg-13: #3F7E44;
   --color-sdg-14: #0A97D9;
   --color-sdg-15: #56C02B;
+
+  --animate-fade-in-up: fadeInUp 0.6s ease-out both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 body {
   font-family: var(--font-geist-sans, system-ui, sans-serif);
   color: var(--color-text-primary);
   background: var(--color-bg-primary);
+}
+
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(circle, #d1d5db 1px, transparent 1px);
+  background-size: 24px 24px;
 }
