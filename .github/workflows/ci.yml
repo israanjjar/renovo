@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  build-meeting-bingo:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -24,9 +24,26 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+  build-impact-hub:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: RenovoImpactHub
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: RenovoImpactHub/package-lock.json
+
+      - run: npm ci
+      - run: npm run build
+
   deploy-staging:
     if: github.event_name == 'pull_request'
-    needs: build
+    needs: [build-meeting-bingo, build-impact-hub]
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -75,7 +92,7 @@ jobs:
 
   deploy-production:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: build
+    needs: [build-meeting-bingo, build-impact-hub]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -92,6 +109,38 @@ jobs:
           node-version: 20
           cache: npm
           cache-dependency-path: MeetingBingo/package-lock.json
+
+      - run: npm ci
+      - run: npm i -g vercel
+
+      - name: Pull Vercel config
+        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+
+      - name: Build for Vercel
+        run: vercel build --prod --token=$VERCEL_TOKEN
+
+      - name: Deploy production
+        run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
+
+  deploy-impact-hub-production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [build-meeting-bingo, build-impact-hub]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: RenovoImpactHub
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_IMPACT_HUB_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: RenovoImpactHub/package-lock.json
 
       - run: npm ci
       - run: npm i -g vercel
